@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+# shellcheck disable=SC2001
+filename=$(echo "$1" | sed -e 's/:.*$//')
+name=$(jestname "$1")
+
+if [ "$name" != "" ]; then
+    (
+        set -x
+        npx jest --verbose "$filename" -t "$name"
+    )
+fi
